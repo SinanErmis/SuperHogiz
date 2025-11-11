@@ -1,15 +1,19 @@
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class HealthController : MonoBehaviour
 {
     public int health = 3;
-
+    public Image[] heartImages;
+    public Sprite emptyHeart;
+    public GameObject deathScreen;
+    
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Border"))
         {
-            SceneManager.LoadScene("SampleScene");
+            Die();
         }
     }
 
@@ -18,9 +22,13 @@ public class HealthController : MonoBehaviour
         if (collision.gameObject.CompareTag("Obstacle"))
         {
             health -= 1;
+            heartImages[health].sprite = emptyHeart;
+            // ui'i guncelle
+            
+            //
             if (health <= 0)
             {
-                SceneManager.LoadScene("SampleScene");
+                Die();
             }
             else
             {
@@ -28,4 +36,15 @@ public class HealthController : MonoBehaviour
             }
         }
     }
+
+    void Die()
+    {
+        deathScreen.SetActive(true);
+    }
+
+    public void RestartScene()
+    {
+        SceneManager.LoadScene("SampleScene");
+    }
+
 }

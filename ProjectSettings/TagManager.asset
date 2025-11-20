@@ -8,6 +8,8 @@ TagManager:
   - FinishLine
   - Border
   - Obstacle
+  - EnemyPoint
+  - Enemy
   layers:
   - Default
   - TransparentFX
